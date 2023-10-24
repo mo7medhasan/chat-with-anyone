@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { AspectRatio } from './ui/aspect-ratio'
 import Image from 'next/image'
-
+import LogoImage from "@logos/logo.svg"
 function Logo() {
   return (
     <Link href={'/'} prefetch={false} className='overflow-hidden'>
@@ -13,7 +13,7 @@ function Logo() {
             >
                 <Image 
                 priority
-                src={''}
+                src={LogoImage}
                 alt='logo'
                 className='dark:filter dark:invert'
                 />
