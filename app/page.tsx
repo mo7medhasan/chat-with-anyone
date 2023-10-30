@@ -48,7 +48,7 @@ export default function Home() {
 
             </div>
           </div>
-          
+
         </div>
         <div className='absolute inset-x-0 top-28 -z-10 transform-gpu overflow-hidden blur-3xl '
           aria-hidden="true">
