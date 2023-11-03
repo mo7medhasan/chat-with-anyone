@@ -5,12 +5,12 @@ import DarkModeToggle from './DarkModeToggle'
 import UserButton from './UserButton'
 import { authOptions } from '@/auth'
 import { getServerSession } from "next-auth"
-import {  MessagesSquareIcon } from 'lucide-react'
+import { MessagesSquareIcon } from 'lucide-react'
 import CreateChatButton from './CreateChatButton'
 async function Header() {
   const session = await getServerSession(authOptions)
 
-  
+
 
   return (
     <header className='sticky top-0 z-50 bg-white dark:bg-gray-900 '>
@@ -23,10 +23,10 @@ async function Header() {
 
               <Link href={'/chat'} prefetch={false}>
                 <MessagesSquareIcon className='text-black dark:text-white'
-                 /></Link>
-                 <CreateChatButton/>
+                /></Link>
+              <CreateChatButton />
             </>
-          ):(
+          ) : (
             <Link href={'/pricing'} >Pricing</Link>
           )}
           <DarkModeToggle />
