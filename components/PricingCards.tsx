@@ -5,7 +5,7 @@ import CheckoutButton from './CheckoutButton';
 const tiers = [
   {
     name: "Starter",
-    id: "starter_ID",
+    id: null,
     href: "",
     priceMonthly: null,
     description: "Get chatting right away with anyone, anywhere!",
@@ -19,9 +19,9 @@ const tiers = [
   },
   {
     name: "Pro",
-    id: "si_OnlcsLNQYBMVZV",
-    href: "",
-    priceMonthly: "5.99",
+    id: "pro",
+    href: "#",
+    priceMonthly: "$1",
     description: "Unlock the Full Potential with Pro!",
     features: [
       "Unlimited Chat Rooms",
@@ -39,9 +39,8 @@ function PricingCards({ redirect }: { redirect: boolean }) {
     <div>
       <div className='mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2 '>
         {tiers.map(tier => (<div key={tier.id}
-          className='flex flex—col justify—between rounded—3xl
-      ring—1 p-8 ring—gray-900/10 sm:p-10"
-      bg—white shadow—xl'>
+          className='flex flex—col justify-between bg-white rounded-3xl  text-black
+      ring-1 p-8 ring-gray-900/10 sm:p-10  shadow-xl'>
           <div>
             <h3
               id={tier.id + tier.name}
@@ -80,7 +79,6 @@ function PricingCards({ redirect }: { redirect: boolean }) {
                 </li>
               ))}
             </ul>
-          </div>
           {redirect ? (
             <Link href={'/register'} className="mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 
             text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline
@@ -88,6 +86,7 @@ function PricingCards({ redirect }: { redirect: boolean }) {
               Get Stated Today
             </Link>
           ) : (tier.id && <CheckoutButton />)}
+          </div>
         </div>))}
       </div>
     </div>
