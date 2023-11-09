@@ -20,7 +20,7 @@ export interface ChatMembers {
 
 }
 
-const : FirestoreDataConverter<ChatMembers> = {
+const chatMembersConverter: FirestoreDataConverter<ChatMembers> = {
   toFirestore: function (member: ChatMembers): DocumentData {
     return {
       userId:member.userId,
