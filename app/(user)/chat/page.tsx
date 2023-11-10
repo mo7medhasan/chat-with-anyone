@@ -10,6 +10,10 @@ type Props={
 function ChatsPage({searchParams:{error}}:Props) {
   return (
     <div>
+<h1>
+  chats
+</h1>
+
         <ChatList/> 
     </div>
   )

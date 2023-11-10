@@ -63,7 +63,7 @@ export const chatMemberAdminRef = (chatId: string) =>
     where("isAdmin", "==", true)
   ).withConverter(chatMembersConverter);
 
-export const chatMembersCollectGroupRef = (userId: string) =>
+export const chatMembersCollectionGroupRef = (userId: string) =>
   query(
     collectionGroup(db, "members"),
     where("userId", "==", userId)
