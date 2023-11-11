@@ -1,22 +1,18 @@
 import ChatList from "@/components/ChatList";
 
-type Props={
-    params:{};
-    searchParams:{
-        error:string;
-    }
-}
+type Props = {
+  params: {};
+  searchParams: {
+    error: string;
+  };
+};
 
-function ChatsPage({searchParams:{error}}:Props) {
+function ChatsPage({ searchParams: { error } }: Props) {
   return (
     <div>
-<h1>
-  chats
-</h1>
-
-        <ChatList/> 
+      <ChatList />
     </div>
-  )
+  );
 }
 
-export default ChatsPage
+export default ChatsPage;
