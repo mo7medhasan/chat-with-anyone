@@ -1,14 +1,21 @@
 import { authOptions } from '@/auth';
 import ChatInput from '@/components/ChatInput';
 import { getServerSession } from 'next-auth';
+import { type } from 'os';
 import React from 'react'
 
-async function ChatPage() {
+type Props={
+  params:{
+    chatId:string;
+  }
+}
+
+async function ChatPage({params:{chatId}}:Props) {
   const session = await getServerSession(authOptions);
   return (
     <>
 
-      {/* <ChatInput/> */}
+      <ChatInput chatId={chatId}/>
     </>
   )
 }

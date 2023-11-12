@@ -16,6 +16,9 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { User, messageRef } from "@/lib/converters/Message"
+import { addDoc, serverTimestamp } from "firebase/firestore"
+import { useRouter } from "next/navigation"
 
 
 const formSchema = z.object({
@@ -24,7 +27,7 @@ const formSchema = z.object({
 
 function ChatInput({ chatId }: { chatId: string }) {
     const { data: session } = useSession()
-
+    const router=useRouter()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -34,14 +37,30 @@ function ChatInput({ chatId }: { chatId: string }) {
 
 
 
-async function onSubmit(values:z.infer<typeof formSchema>) {
-    if(values.input.length===0){
-        return;
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        if (values.input.length === 0) {
+            return;
+        }
+        if (!session?.user) {
+            return;
+        }
+
+        const userToStore:User={
+            id:session.user.id!,
+            name:session.user.name!,
+            email:session.user.email!,
+            image:session.user.image ||""
+        }
+        addDoc(
+            messageRef(chatId),{
+                input:values.input,
+                timestamp:serverTimestamp(),
+                user:userToStore
+            }
+        );
+
+        form.reset()
     }
-if(!session?.user){
-    return ;
-}    
-}
 
 
     return (
@@ -56,10 +75,10 @@ if(!session?.user){
                                 <FormLabel>Username</FormLabel>
                                 <FormControl>
                                     <Input
-                                    className="border-none bg-transparent dark:placeholder:text-white/70"
-                                    placeholder="Enter Message in Any Language" {...field} />
+                                        className="border-none bg-transparent dark:placeholder:text-white/70"
+                                        placeholder="Enter Message in Any Language" {...field} />
                                 </FormControl>
-                             
+
                                 <FormMessage />
                             </FormItem>
                         )}
