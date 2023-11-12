@@ -16,9 +16,12 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { User, messageRef } from "@/lib/converters/Message"
-import { addDoc, serverTimestamp } from "firebase/firestore"
+import { User, limitedMessageRef, messageRef } from "@/lib/converters/Message"
+import { addDoc, getDocs, serverTimestamp } from "firebase/firestore"
 import { useRouter } from "next/navigation"
+import { useSubscriptionStore } from "@/store/store"
+import { useToast } from "./ui/use-toast"
+import { ToastAction } from "@radix-ui/react-toast"
 
 
 const formSchema = z.object({
@@ -27,7 +30,9 @@ const formSchema = z.object({
 
 function ChatInput({ chatId }: { chatId: string }) {
     const { data: session } = useSession()
-    const router=useRouter()
+    const router = useRouter()
+    const { toast } = useToast()
+    const subscription = useSubscriptionStore((state) => state.subscription);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -44,19 +49,35 @@ function ChatInput({ chatId }: { chatId: string }) {
         if (!session?.user) {
             return;
         }
+        const messages = ((await getDocs(limitedMessageRef(chatId))).docs.map((doc) => doc.data())).length;
 
-        const userToStore:User={
-            id:session.user.id!,
-            name:session.user.name!,
-            email:session.user.email!,
-            image:session.user.image ||""
+        const isPro = subscription?.role === "pro" && subscription.status === "active";
+
+        if (!isPro && messages >= 20) {
+            toast({
+                title: "free plan limit exceeded",
+                description: "You've'exceeded the FREE plan limit of 20 messages per chat.\n Upgrade to PRO for unlimited chat messages!  "
+                , variant: "destructive",
+                action: (<ToastAction altText="Upgrade"
+                    onClick={() => router.push("/register")} >
+                    Upgrade to PRO
+                </ToastAction>)
+            })
+        }
+
+
+        const userToStore: User = {
+            id: session.user.id!,
+            name: session.user.name!,
+            email: session.user.email!,
+            image: session.user.image || ""
         }
         addDoc(
-            messageRef(chatId),{
-                input:values.input,
-                timestamp:serverTimestamp(),
-                user:userToStore
-            }
+            messageRef(chatId), {
+            input: values.input,
+            timestamp: serverTimestamp(),
+            user: userToStore
+        }
         );
 
         form.reset()
