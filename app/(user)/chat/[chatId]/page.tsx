@@ -1,5 +1,6 @@
 import { authOptions } from '@/auth';
 import ChatInput from '@/components/ChatInput';
+import ChatMembersBadges from '@/components/ChatMembersBadges';
 import ChatMessages from '@/components/ChatMessages';
 import { limitedMessageRef } from '@/lib/converters/Message';
 import { getDocs } from 'firebase/firestore';
@@ -20,6 +21,7 @@ async function ChatPage({ params: { chatId } }: Props) {
 
   return (
     <>
+    <ChatMembersBadges chatId={chatId} />
       <div className='flex-1'>
         <ChatMessages chatId={chatId} session={session} initialMessages={initialMessages} />
       </div>
