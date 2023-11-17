@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import useAdminId from "@/hooks/useAdminId";
 import { ChatMembers, chatMembersRef } from "@/lib/converters/ChatMembers";
 import { useCollectionData } from "react-firebase-hooks/firestore";

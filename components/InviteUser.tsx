@@ -53,59 +53,56 @@ function InviteUser({ chatId }: { chatId: string }) {
       email: "",
     },
   });
-  return (adminId === session?.user.id && (
-    <>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button>
-            <PlusCircleIcon className="mr-1" />
-            Add User To Chat
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>
+  return (
+    adminId === session?.user.id && (
+      <>
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button>
+              <PlusCircleIcon className="mr-1" />
               Add User To Chat
-            </DialogTitle>
-            <DialogDescription>
-              Simply enter another users email address to invite them to this
-              Chat! {" "}
-              <span className="">
-                (Note: they must be registered)
-              </span>
-            </DialogDescription>
-          </DialogHeader>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Add User To Chat</DialogTitle>
+              <DialogDescription>
+                Simply enter another users email address to invite them to this
+                Chat! <span className="">(Note: they must be registered)</span>
+              </DialogDescription>
+            </DialogHeader>
 
-          <Form {...form}>
-            <form
-              // onSubmit={form.handleSubmit(onSubmit)}
-              className="flex flex-col space-y-2">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input placeholder="john@doe.com" {...field} />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <Button className="ml-auto sm:w-fit w-full" type="submit">
-                Add To Chat
-              </Button>
-            </form>
-
-          </Form>
-        </DialogContent>
-      </Dialog>
-      {/* <ShareLink
+            <Form {...form}>
+              <form
+                // onSubmit={form.handleSubmit(onSubmit)}
+                className="flex flex-col space-y-2"
+              >
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="john@doe.com" {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <Button className="ml-auto sm:w-fit w-full" type="submit">
+                  Add To Chat
+                </Button>
+              </form>
+            </Form>
+          </DialogContent>
+        </Dialog>
+        {/* <ShareLink
         isOpen={openInviteLink}
         setIsOpen={setOpenInviteLink}
         chatId={chatId}
       /> */}
-    </>
-  ));
+      </>
+    )
+  );
 }
 
 export default InviteUser;
