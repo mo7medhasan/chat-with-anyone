@@ -24,14 +24,31 @@ function DeleteChatButton({ chatId }: { chatId: string }) {
     const router = useRouter();
     const adminId = useAdminId({ chatId });
 
-const  handleDelete=async()=>{
-toast({
-    title: "Deleting chat" ,
-description: "Please wait while we delete the chat..." ,
-})
-console.log("Delete :: ",chatId)
-}
-    
+    const handleDelete = async () => {
+        toast({
+            title: "Deleting chat",
+            description: "Please wait while we delete the chat...",
+        })
+        console.log("Delete :: ", chatId);
+
+        await fetch("/api/chat/delete", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ chatId: chatId })
+        }).then((res) => {
+            toast({
+                title: "Success",
+                description: "Your chat has been deleted!",
+                className: "bg-green-600 text-white",
+                duration: 3000,
+            })
+            router.replace('/chat')
+        }).finally(()=>setOpen(false))
+
+    }
+
 
     return adminId === session?.user.id && (
 
@@ -55,7 +72,7 @@ console.log("Delete :: ",chatId)
                 <div className="grid grid-cols-2 space-x-2 " >
 
                     <Button variant={"destructive"}
-                    onClick={handleDelete}
+                        onClick={handleDelete}
                     >
                         Delete
                     </Button>

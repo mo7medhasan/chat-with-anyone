@@ -109,7 +109,7 @@ function InviteUser({ chatId }: { chatId: string }) {
         toast({
           title: "Added to chat",
           description: "The user has been added to the chat successfully!",
-          className: "bg-green—600 text—white",
+          className: "bg-green-600 text-white",
           duration: 3000,
         })
         setOpenInviteLink(true)
@@ -171,10 +171,10 @@ function InviteUser({ chatId }: { chatId: string }) {
           </DialogContent>
         </Dialog>
         <ShareLink
-        isOpen={openInviteLink}
-        setIsOpen={setOpenInviteLink}
-        chatId={chatId}
-      />
+          isOpen={openInviteLink}
+          setIsOpen={setOpenInviteLink}
+          chatId={chatId}
+        />
       </>
     )
   );
