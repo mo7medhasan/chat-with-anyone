@@ -44,59 +44,57 @@ function PricingCards({ redirect }: { redirect: boolean }) {
             className="flex flex-col justify-between bg-white rounded-3xl  text-black
       ring-1 p-8 ring-gray-900/10 sm:p-10  shadow-xl"
           >
-       
-              <h3
-                id={tier.id + tier.name}
-                className={`text-base font-semibold leading-7 text-indigo-600 ${tier.name}`}
-              >
-                {tier.name}
-              </h3>
-              <div className="mt-4 flex items-baseline gap-x-2">
-                {tier.priceMonthly ? (
-                  <>
-                    <span className="text-5xl font-bold tracking-tight text-gray-988">
-                      {tier.priceMonthly}
-                    </span>
-                    <span className="text-base font-semibold leading-7 text-gray-500">
-                      /month
-                    </span>
-                  </>
-                ) : (
-                  <span className="text-5xl font-bold tracking-tight Otext-gray-900">
-                    Free
+            <h3
+              id={tier.id + tier.name}
+              className={`text-base font-semibold leading-7 text-indigo-600 ${tier.name}`}
+            >
+              {tier.name}
+            </h3>
+            <div className="mt-4 flex items-baseline gap-x-2">
+              {tier.priceMonthly ? (
+                <>
+                  <span className="text-5xl font-bold tracking-tight text-gray-988">
+                    {tier.priceMonthly}
                   </span>
-                )}
-              </div>
-              <p className="nt-6 text-base leading-7 text-gray-600">
-                {tier.description}
-              </p>
-              <ul
-                role="List"
-                className="mt-10 space-y-4 text-sm leading-6 @text-gray-680"
-              >
-                {tier.features.map((feature) => (
-                  <li key={feature} className="flex gap-x-3">
-                    <CheckIcon
-                      className="h-6 w-5 flex-none text-indigo-600"
-                      aria-hidden="true"
-                    />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              {redirect ? (
-                <Link
-                  href={"/register"}
-                  className="mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 
+                  <span className="text-base font-semibold leading-7 text-gray-500">
+                    /month
+                  </span>
+                </>
+              ) : (
+                <span className="text-5xl font-bold tracking-tight Otext-gray-900">
+                  Free
+                </span>
+              )}
+            </div>
+            <p className="nt-6 text-base leading-7 text-gray-600">
+              {tier.description}
+            </p>
+            <ul
+              role="List"
+              className="mt-10 space-y-4 text-sm leading-6 @text-gray-680"
+            >
+              {tier.features.map((feature) => (
+                <li key={feature} className="flex gap-x-3">
+                  <CheckIcon
+                    className="h-6 w-5 flex-none text-indigo-600"
+                    aria-hidden="true"
+                  />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            {redirect ? (
+              <Link
+                href={"/register"}
+                className="mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 
             text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline
              focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer disabled:opacity-80"
-                >
-                  Get Stated Today
-                </Link>
-              ) : (
-                (tier.id) && <CheckoutButton />
-              )}
-          
+              >
+                Get Stated Today
+              </Link>
+            ) : (
+              tier.id && <CheckoutButton />
+            )}
           </div>
         ))}
       </div>
