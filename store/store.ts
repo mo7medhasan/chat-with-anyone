@@ -25,7 +25,7 @@ export const LanguagesSupportedMap: Record<LanguagesSupported, string> = {
   zh: "Mandarin",
 };
 
-const LANGUAGES_IN_FREE = 2;
+const LANGUAGES_IN_FREE = 4;
 
 interface LanguageState {
   language: LanguagesSupported;

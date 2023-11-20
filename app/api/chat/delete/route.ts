@@ -1,11 +1,11 @@
 import { adminDb } from "@/firebase-admin";
 import { NextResponse } from "next/server";
 
-export async function Delete(req:Request) {
+export async function DELETE(req:Request) {
     const {chatId} =await req.json();
     const ref =adminDb.collection("chats").doc(chatId);
     const bulkWriter=adminDb.bulkWriter()
-    const MAX_RETRY_ATTEMPTS=5;
+    const MAX_RETRY_ATTEMPTS=10;
     bulkWriter.onWriteError((error)=>{
         if(error.failedAttempts<MAX_RETRY_ATTEMPTS){
             return true;

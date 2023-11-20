@@ -128,8 +128,7 @@ function InviteUser({ chatId }: { chatId: string }) {
 
 
 
-  return (
-    adminId === session?.user.id && (
+  return  (
       <>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
@@ -177,7 +176,7 @@ function InviteUser({ chatId }: { chatId: string }) {
         />
       </>
     )
-  );
+  
 }
 
 export default InviteUser;

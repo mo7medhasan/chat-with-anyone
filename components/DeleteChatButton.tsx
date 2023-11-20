@@ -29,7 +29,7 @@ function DeleteChatButton({ chatId }: { chatId: string }) {
             title: "Deleting chat",
             description: "Please wait while we delete the chat...",
         })
-        console.log("Delete :: ", chatId);
+      
 
         await fetch("/api/chat/delete", {
             method: "DELETE",
@@ -50,7 +50,7 @@ function DeleteChatButton({ chatId }: { chatId: string }) {
     }
 
 
-    return adminId === session?.user.id && (
+    return  (
 
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
