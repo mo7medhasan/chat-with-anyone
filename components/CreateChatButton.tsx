@@ -8,10 +8,10 @@ import { useState } from "react"
 import { useToast } from "./ui/use-toast"
 import { useSubscriptionStore } from "@/store/store"
 import LoadingSpinner from "./LoadingSpinner"
-import { serverTimestamp, setDoc } from "firebase/firestore"
+import { getDocs, serverTimestamp, setDoc } from "firebase/firestore"
 
 import { v4 as uuidv4 } from 'uuid';
-import { addChatRef } from "@/lib/converters/ChatMembers"
+import { addChatRef, chatMembersCollectionGroupRef } from "@/lib/converters/ChatMembers"
 
 
 function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
@@ -19,7 +19,7 @@ function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
-
+  const subscription = useSubscriptionStore((state)=>state.subscription);
   const createNewChat = async () => {
     if (!session?.user.id) return;
     setLoading(true);
@@ -28,6 +28,12 @@ function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
       description: "Hold tight while we create your new chat...",
       duration: 3000
     })
+
+    const noOfChats = (await getDocs(chatMembersCollectionGroupRef(session.user.id))).docs.map((doc) => doc.data()).length;
+
+    const isPro=subscription?.role==="pro"&&subscription?.status==="active"
+
+
     const chatId = uuidv4();
 
 
@@ -43,7 +49,7 @@ function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
       toast({
         title: "Success",
         description: "Your chat has been created!",
-        className:"bg-green-600 text-white",
+        className: "bg-green-600 text-white",
         duration: 2000
       });
       router.push(`/chat/${chatId}`)
