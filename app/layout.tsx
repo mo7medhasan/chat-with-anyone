@@ -30,7 +30,7 @@ export default function RootLayout({
               >
                 <Header />
                 {children}
-                <footer className="w-full h-10 text-center text-white bg-black dark:text-white dark:bg-black ">
+                <footer className="w-full h-10 text-center flex justify-center items-center text-white bg-black dark:text-white dark:bg-black ">
                 © {new Date().getFullYear()} Mo7med
                 </footer>
                 <Toaster/>
