@@ -11,7 +11,7 @@ function ChatListRow({ chatId }: { chatId: string }) {
   const [messages, loading, error] = useCollectionData<Message>(
     limitedSortedMessagesRef(chatId)
   );
-  const language=useLanguageStore(state=>state.language)
+  const language = useLanguageStore(state => state.language)
   const { data: session } = useSession();
   function prettyUUID(n = 4) {
     return chatId.substring(0, n);
@@ -33,12 +33,12 @@ function ChatListRow({ chatId }: { chatId: string }) {
         </p>
       </div>
       <div className="text-xs text-gray-400 text-right">
-      <p className="mb-auto ">
-        {message? new Date(message.timestamp).toLocaleTimeString():"No message yet"}
-      </p>
-      <p className="">
-        Chat #{prettyUUID()}
-      </p>
+        <p className="mb-auto ">
+          {message ? new Date(message.timestamp).toLocaleTimeString() : "No message yet"}
+        </p>
+        <p className="">
+          Chat #{prettyUUID()}
+        </p>
       </div>
     </div>
   )
