@@ -8,10 +8,10 @@ function UpgradeBanner() {
   const subscription = useSubscriptionStore((state) => state.subscription);
   const isPro = subscription?.role === "pro";
   const router = useRouter();
-console.log(subscription?.role,
-  subscription,
-  isPro);
-  if (subscription === undefined || isPro) return ;
+  console.log(subscription?.role,
+    subscription,
+    isPro);
+  if (subscription === undefined || isPro) return;
 
 
   return (
